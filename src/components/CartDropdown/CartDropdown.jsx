@@ -5,15 +5,20 @@ import { CartContext } from '../../contexts/CartContext'
 import Button from '../Button/Button'
 import CartItem from '../CartItem/CartItem'
 import { CartDropdownContainer, CartItems, EmptyMessage } from './CartDropdown.styles'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCartItems } from '../../store/cart/cart.selector'
+import { setIsCartOpen } from '../../store/cart/cart.action'
 
 
 
 const CartDropdown = () => {
-  const { cartItems, setIsCartOpen } = useContext(CartContext);
+  // const { cartItems, setIsCartOpen } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
   
   const navigateHandler = () => {
-    setIsCartOpen(false)
+   dispatch(setIsCartOpen(false))
     navigate('/checkout')
   }
 

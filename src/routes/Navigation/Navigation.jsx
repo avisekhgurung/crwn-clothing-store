@@ -7,14 +7,22 @@ import {NavigationContainer, LogoContainer, NavLinksContainer, NavLink} from './
 import CartIcon from '../../components/CartIcon/CartIcon';
 import CartDropdown from '../../components/CartDropdown/CartDropdown';
 import { CartContext } from '../../contexts/CartContext';
+import { setCurrentUser } from '../../store/user/user.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../store/user/user.selector';
+import { selectIsCartOpen } from '../../store/cart/cart.selector';
 
 const Navigation = () => {
-    const {currentUser, setCurrentUser} = useContext(UserContext);
-    const {isCartOpen} = useContext(CartContext);
+    const dispatch = useDispatch();
+    const currentUser = useSelector(selectCurrentUser);
+    // const {isCartOpen} = useContext(CartContext);
+    const isCartOpen = useSelector(selectIsCartOpen);
+
     const signOutHandler = async() => {
     await signOutUser;
-    setCurrentUser(null)         
+    dispatch(setCurrentUser(null))         
     }
+    
     return (
         <Fragment>
             <NavigationContainer>

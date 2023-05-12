@@ -21,7 +21,7 @@ export const CategoriesProvider = ({children}) => {
            setCategoriesMap(categoryMap)
         }
         getCategories()
-    },[])
+},[])
 
     return (
         <CategoriesContext.Provider value={value}>

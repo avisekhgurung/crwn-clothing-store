@@ -43,7 +43,41 @@ export const CartContext = createContext({
     removeItemToCart: () => {},
     clearItemFromCart: () => {},
     total: 0
-})
+}) 
+
+const CART_ACTION_TYPES = {
+    SET_CART_ITEMS: 'SET_CART_ITEMS',
+    SET_IS_CART_OPEN: 'SET_IS_CART_OPEN',
+    SET_CART_COUNT: 'SET_CART_COUNT',
+    SET_CART_TOTAL: 'SET_CART_TOTAL',
+}
+
+const INITIAL_STATE = {
+    isCartOpen: false,
+    cartItems: [],
+    cartCount: 0,
+    cartTotal: 0
+}
+
+const cartReducer = (state, action) => {
+    const {type, payload} = action;
+    switch(type){
+        case CART_ACTION_TYPES.SET_CART_ITEMS:
+            return {
+                ...state,
+                ...payload
+            }
+        case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+            return {
+                ...state,
+                isCartOpen: payload,
+            }
+        default:
+            throw new Error(`Unhandled Type ${type} in cartReducer`)
+    }
+}
+
+const AddToCartAction = (itemToAdd) => dispatchEvent({type:'ADD_TO_CART', payload:itemToAdd})
 
 const CART_ACTION_TYPES = {
     SET_CART_ITEMS: 'SET_CART_ITEMS',
